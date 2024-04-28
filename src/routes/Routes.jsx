@@ -6,6 +6,9 @@ import HLayout from "../pages/home/HLayout";
 import PrivateProvider from "../private/PrivateProvider";
 import UpdateProfile from "../pages/home/UpdateProfile";
 import AddProperty from "../pages/add-property/AddProperty";
+import HouseListLayout from "../pages/house-list/HouseListLayout";
+import UpdateHouse from "../pages/house-list/UpdateHouse";
+import AddTeantLayout from "../pages/add-teant/AddTeantLayout";
 
 const router = createBrowserRouter([
     {
@@ -30,8 +33,21 @@ const router = createBrowserRouter([
                 loader: ({params}) => fetch(`http://localhost:3000/users/${params.id}`)
             },
             {
-                path: '/addproperty',
+                path: '/addhouse',
                 element: <PrivateProvider><AddProperty/></PrivateProvider>
+            },
+            {
+                path: '/houselist',
+                element: <PrivateProvider><HouseListLayout/></PrivateProvider>
+            },
+            {
+                path: '/updatehouse/:id',
+                element: <PrivateProvider><UpdateHouse/></PrivateProvider>,
+                loader: ({params}) => fetch(`http://localhost:3000/houses/${params.id}`)
+            },
+            {
+                path: '/addteant',
+                element: <AddTeantLayout/>,
             }
         ]
     },

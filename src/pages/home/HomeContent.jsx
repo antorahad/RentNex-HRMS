@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hook/useAuth";
 import ProfileCard from "./ProfileCard";
+import { MdMapsHomeWork } from "react-icons/md";
+import { FaUsers } from "react-icons/fa";
 
 const HomeContent = () => {
     const { user } = useAuth();
@@ -30,43 +32,44 @@ const HomeContent = () => {
                         userInfo.map(item => <ProfileCard key={item._id} item={item}></ProfileCard>)
                     }
                 </div>
-                <div className="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div className="card bg-primary text-primary-content hover:scale-105 transition-transform duration-300 ease-in-out">
-                        <div className="card-body">
-                            <h2 className="card-title">Total House</h2>
-                            <p>{house.length}</p>
-                            <div className="card-actions justify-end">
-                                <button className="btn">Buy Now</button>
+                <div className="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="card bg-violet-600 rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out">
+                        <div className="card-body text-white">
+                            <div className="w-[60px] h-[60px] bg-violet-400 text-white rounded-md flex items-center justify-center">
+                                <MdMapsHomeWork size={25} />
                             </div>
+                            <h2 className="text-2xl font-bold">Total House</h2>
+                            <p className="text-xl font-bold">{house.length}</p>
                         </div>
                     </div>
-                    <div className="card bg-primary text-primary-content hover:scale-105 transition-transform duration-300 ease-in-out">
-                        <div className="card-body">
-                            <h2 className="card-title">Card title!</h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div className="card-actions justify-end">
-                                <button className="btn">Buy Now</button>
+                    <div className="card bg-green-600 rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out">
+                        <div className="card-body text-white">
+                            <div className="w-[60px] h-[60px] bg-green-400 text-white rounded-md flex items-center justify-center">
+                                <FaUsers size={25} />
                             </div>
+                            <h2 className="text-2xl font-bold">Total Teant</h2>
+                            <p className="text-xl font-bold">{house.length}</p>
                         </div>
                     </div>
-                    <div className="card bg-primary text-primary-content hover:scale-105 transition-transform duration-300 ease-in-out">
-                        <div className="card-body">
-                            <h2 className="card-title">Card title!</h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div className="card-actions justify-end">
-                                <button className="btn">Buy Now</button>
+                    <div className="card bg-cyan-600 rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out">
+                        <div className="card-body text-white">
+                            <div className="w-[60px] h-[60px] bg-cyan-400 text-white rounded-md flex items-center justify-center">
+                                <MdMapsHomeWork size={25} />
                             </div>
+                            <h2 className="text-2xl font-bold">Total House</h2>
+                            <p className="text-xl font-bold">{house.length}</p>
                         </div>
                     </div>
-                    <div className="card bg-primary text-primary-content hover:scale-105 transition-transform duration-300 ease-in-out">
-                        <div className="card-body">
-                            <h2 className="card-title">Card title!</h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div className="card-actions justify-end">
-                                <button className="btn">Buy Now</button>
+                    <div className="card bg-orange-600 rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out">
+                        <div className="card-body text-white">
+                            <div className="w-[60px] h-[60px] bg-orange-400 text-white rounded-md flex items-center justify-center">
+                                <MdMapsHomeWork size={25} />
                             </div>
+                            <h2 className="text-2xl font-bold">Total House</h2>
+                            <p className="text-xl font-bold">{house.length}</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

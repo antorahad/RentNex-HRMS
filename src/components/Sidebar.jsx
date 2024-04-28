@@ -19,19 +19,19 @@ const Sidebar = ({ toggle }) => {
                     </Link>
                 </li>
                 <li className="py-1">
-                    <Link to={'/addproperty'} className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
+                    <Link to={'/addhouse'} className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
                         <MdOutlineAddHomeWork size={20} />
                         Add House
                     </Link>
                 </li>
                 <li className="py-1">
-                    <Link className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
+                    <Link to={'/houselist'} className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
                         <TbHomeSearch size={20} />
                         House List
                     </Link>
                 </li>
                 <li className="py-1">
-                    <Link className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
+                    <Link to={'/addteant'} className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
                         <FiUserPlus size={20} />
                         Add Teant
                     </Link>
@@ -39,7 +39,7 @@ const Sidebar = ({ toggle }) => {
                 <li className="py-1">
                     <Link className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
                         <RiUserSearchLine size={20} />
-                        Teant List
+                        Teant Record
                     </Link>
                 </li>
                 <li className="py-1">

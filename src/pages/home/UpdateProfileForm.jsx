@@ -69,7 +69,7 @@ const UpdateProfileForm = () => {
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Photo URL*</span>
                     </label>
-                    <input type="text" name="photo" defaultValue={photo} placeholder="Enter your name" className="input rounded-md" required />
+                    <input type="text" name="photo" defaultValue={photo} placeholder="Enter photo url" className="input rounded-md" required />
                 </div>
                 <div className="form-control col-span-1 md:col-span-2">
                     <label className="label">

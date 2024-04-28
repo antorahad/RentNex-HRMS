@@ -7,7 +7,7 @@ const useToogle = () => {
         setToggle(!toggle);
     }
 
-    return { toggle, setToggle, handleToggle };
+    return { toggle, handleToggle };
 };
 
 export default useToogle;
