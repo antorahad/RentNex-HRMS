@@ -1,9 +1,8 @@
 import { FiUserPlus } from "react-icons/fi";
 import { GoHome } from "react-icons/go";
-import { IoDocumentAttachOutline } from "react-icons/io5";
+import { HiOutlineDocumentAdd, HiOutlineDocumentSearch } from "react-icons/hi";
 import { MdAttachEmail, MdOutlineAddHomeWork } from "react-icons/md";
 import { RiUserSearchLine } from "react-icons/ri";
-import { SlCalculator } from "react-icons/sl";
 import { TbHomeSearch } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
@@ -33,24 +32,24 @@ const Sidebar = ({ toggle }) => {
                 <li className="py-1">
                     <Link to={'/addteant'} className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
                         <FiUserPlus size={20} />
-                        Add Teant
+                        Add Tenant
                     </Link>
                 </li>
                 <li className="py-1">
-                    <Link className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
+                    <Link to={'/teantrecord'} className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
                         <RiUserSearchLine size={20} />
-                        Teant Record
+                        Tenant Record
+                    </Link>
+                </li>
+                <li className="py-1">
+                    <Link to={'/addbill'} className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
+                        <HiOutlineDocumentAdd size={20} />
+                        Add Bill
                     </Link>
                 </li>
                 <li className="py-1">
                     <Link className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
-                        <SlCalculator size={20} />
-                        Bill Calculator
-                    </Link>
-                </li>
-                <li className="py-1">
-                    <Link className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
-                        <IoDocumentAttachOutline size={20} />
+                        <HiOutlineDocumentSearch size={20} />
                         Bill Record
                     </Link>
                 </li>

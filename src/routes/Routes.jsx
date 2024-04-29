@@ -9,6 +9,11 @@ import AddProperty from "../pages/add-property/AddProperty";
 import HouseListLayout from "../pages/house-list/HouseListLayout";
 import UpdateHouse from "../pages/house-list/UpdateHouse";
 import AddTeantLayout from "../pages/add-teant/AddTeantLayout";
+import TeantRecordLayout from "../pages/teant-record/TeantRecordLayout";
+import ViewTeantLayout from "../pages/teant-record/ViewTeantLayout";
+import TeantUpdateLayout from "../pages/teant-record/TeantUpdateLayout";
+import AddBillLayout from "../pages/add-bill/AddBillLayout";
+
 
 const router = createBrowserRouter([
     {
@@ -47,7 +52,25 @@ const router = createBrowserRouter([
             },
             {
                 path: '/addteant',
-                element: <AddTeantLayout/>,
+                element: <PrivateProvider><AddTeantLayout/></PrivateProvider>,
+            },
+            {
+                path: '/teantrecord',
+                element: <PrivateProvider><TeantRecordLayout/></PrivateProvider>
+            },
+            {
+                path: '/viewteant/:id',
+                element: <PrivateProvider><ViewTeantLayout/></PrivateProvider>,
+                loader: ({params}) => fetch(`http://localhost:3000/teants/${params.id}`)
+            },
+            {
+                path: '/updateteant/:id',
+                element: <PrivateProvider><TeantUpdateLayout/></PrivateProvider>,
+                loader: ({params}) => fetch(`http://localhost:3000/teants/${params.id}`)
+            },
+            {
+                path: '/addbill',
+                element: <PrivateProvider><AddBillLayout/></PrivateProvider>
             }
         ]
     },

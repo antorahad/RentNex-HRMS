@@ -1,12 +1,13 @@
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAuth from "../../hook/useAuth";
-import { useLocation, useNavigate } from "react-router-dom";
 
-const AddTeantContent = () => {
-    const { user } = useAuth();
+const TeantUpdateForm = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const handleAddTeant = e => {
+    const teantData = useLoaderData();
+    const { _id, name, contact, teantemail, photo, gender, religion, marital, nid, member, family, occupation, floor, unit, checkindate, checkoutdate, status, previousowner, ownercontact, address } = teantData;
+
+    const handleUpdateTeant = e => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -28,56 +29,54 @@ const AddTeantContent = () => {
         const previousowner = form.previousowner.value;
         const ownercontact = form.ownercontact.value;
         const address = form.address.value;
-        const email = user.email;
 
-        const newTeant = {
-            name, teantemail, contact, gender, religion, marital, nid, member, family, photo, occupation, floor, unit, checkindate, checkoutdate, status, previousowner, ownercontact, address, email
+        const updateTeant = {
+            name, teantemail, contact, gender, religion, marital, nid, member, family, photo, occupation, floor, unit, checkindate, checkoutdate, status, previousowner, ownercontact, address
         }
 
-        fetch(`http://localhost:3000/teants?email=${user?.email}`, {
-            method: "POST",
+        fetch(`http://localhost:3000/teants/${_id}`, {
+            method: "PUT",
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newTeant)
+            body: JSON.stringify(updateTeant)
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                if (data.insertedId) {
+                if (data.modifiedCount > 0) {
                     Swal.fire({
-                        title: "Congratulation",
-                        text: "Tenant added successfully",
+                        title: "Updated",
+                        text: "Tenant has been updated",
                         icon: "success"
                     });
-                    form.reset()
+                    form.reset();
                     navigate(location?.state ? location.state : '/teantrecord');
                 }
-            })
+            });
     }
     return (
         <div className="w-full px-5 py-10 max-w-7xl mx-auto">
             <div className="banner h-[250px] mt-16 mb-8 flex items-center justify-center rounded-2xl text-white font-bold text-xl md:text-2xl lg:text-4xl">
-                <h1>Rent<span className="text-primeColor">Nex</span> | Add Tenant</h1>
+                <h1>Rent<span className="text-primeColor">Nex</span> | Update Tenant</h1>
             </div>
-            <form onSubmit={handleAddTeant} className="w-full lg:w-3/4 mx-auto bg-bodyColor bg-opacity-80 rounded-md p-5 grid grid-cols-1 md:grid-cols-3 gap-5">
+            <form onSubmit={handleUpdateTeant} className="w-full lg:w-3/4 mx-auto bg-bodyColor bg-opacity-80 rounded-md p-5 grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Name*</span>
                     </label>
-                    <input type="text" name="name" placeholder="Enter tenant name" className="input rounded-md" />
+                    <input type="text" name="name" defaultValue={name} placeholder="Enter tenant name" className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Contact No*</span>
                     </label>
-                    <input type="text" name="contact" placeholder="Enter contact no" className="input rounded-md" />
+                    <input type="text" name="contact" defaultValue={contact} placeholder="Enter contact no" className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label flex items-center gap-1">
                         <span className="label-text text-primeColor font-bold">Email*</span>
                     </label>
-                    <input type="email" name="teantemail" placeholder="Enter email address" className="input rounded-md" />
+                    <input type="email" name="teantemail" defaultValue={teantemail} placeholder="Enter email address" className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
@@ -85,7 +84,7 @@ const AddTeantContent = () => {
                     </label>
                     <select
                         className="select rounded-md"
-                        name="gender"
+                        name="gender" defaultValue={gender}
                     >
                         <option value="">
                             Select Gender
@@ -101,7 +100,7 @@ const AddTeantContent = () => {
                     </label>
                     <select
                         className="select rounded-md"
-                        name="religion"
+                        name="religion" defaultValue={religion}
                     >
                         <option value="">
                             Select Religion
@@ -119,7 +118,7 @@ const AddTeantContent = () => {
                     </label>
                     <select
                         className="select rounded-md"
-                        name="marital"
+                        name="marital" defaultValue={marital}
                     >
                         <option value="">
                             Select Marital Status
@@ -134,13 +133,13 @@ const AddTeantContent = () => {
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">NID No*</span>
                     </label>
-                    <input type="text" name="nid" placeholder="Enter nid number" className="input rounded-md" />
+                    <input type="text" name="nid" defaultValue={nid} placeholder="Enter nid number" className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Total Member*</span>
                     </label>
-                    <input type="number" name="member" placeholder="Enter member number" min={1} className="input rounded-md" />
+                    <input type="number" name="member" defaultValue={member} placeholder="Enter member number" min={1} className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
@@ -148,7 +147,7 @@ const AddTeantContent = () => {
                     </label>
                     <select
                         className="select rounded-md"
-                        name="family"
+                        name="family" defaultValue={family}
                     >
                         <option value="">
                             Select Family Type
@@ -165,7 +164,7 @@ const AddTeantContent = () => {
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Photo URL*</span>
                     </label>
-                    <input type="text" name="photo" placeholder="Enter photo url" className="input rounded-md" />
+                    <input type="text" name="photo" defaultValue={photo} placeholder="Enter photo url" className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
@@ -173,7 +172,7 @@ const AddTeantContent = () => {
                     </label>
                     <select
                         className="select rounded-md"
-                        name="occupation"
+                        name="occupation" defaultValue={occupation}
                     >
                         <option value="">
                             Select Occupation
@@ -189,25 +188,25 @@ const AddTeantContent = () => {
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Rented Floor*</span>
                     </label>
-                    <input type="number" name="floor" placeholder="Enter rented floor" min={1} className="input rounded-md" />
+                    <input type="number" name="floor" defaultValue={floor} placeholder="Enter rented floor" min={1} className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Rented Unit*</span>
                     </label>
-                    <input type="number" name="unit" placeholder="Enter rented unit" min={1} className="input rounded-md" />
+                    <input type="number" name="unit" defaultValue={unit} placeholder="Enter rented unit" min={1} className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Check In Date*</span>
                     </label>
-                    <input type="date" name="checkindate" className="input rounded-md" />
+                    <input type="date" name="checkindate" defaultValue={checkindate} className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Check Out Date*</span>
                     </label>
-                    <input type="date" name="checkoutdate" className="input rounded-md" />
+                    <input type="date" name="checkoutdate" defaultValue={checkoutdate} className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
@@ -215,7 +214,7 @@ const AddTeantContent = () => {
                     </label>
                     <select
                         className="select rounded-md"
-                        name="status"
+                        name="status" defaultValue={status}
                     >
                         <option value="">
                             Select Tenant Status
@@ -228,24 +227,24 @@ const AddTeantContent = () => {
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Previous House Owner*</span>
                     </label>
-                    <input type="text" name="previousowner" placeholder="Enter owner name" className="input rounded-md" />
+                    <input type="text" name="previousowner" defaultValue={previousowner} placeholder="Enter owner name" className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Owner Contact No*</span>
                     </label>
-                    <input type="text" name="ownercontact" placeholder="Enter owner contact no" className="input rounded-md" />
+                    <input type="text" name="ownercontact" defaultValue={ownercontact} placeholder="Enter owner contact no" className="input rounded-md" />
                 </div>
                 <div className="form-control col-span-1 md:col-span-3">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Permanent Address*</span>
                     </label>
-                    <textarea type="text" name="address" placeholder="Enter tenant permanent address" className="textarea rounded-md h-24" />
+                    <textarea type="text" name="address" defaultValue={address} placeholder="Enter tenant permanent address" className="textarea rounded-md h-24" />
                 </div>
-                <input type="submit" className="btn btn-block col-span-1 md:col-span-3 outline-none border-none bg-primeColor hover:bg-primeColor focus:bg-primeColor text-white rounded-md" value="Add Tenant" />
+                <input type="submit" className="btn btn-block col-span-1 md:col-span-3 outline-none border-none bg-primeColor hover:bg-primeColor focus:bg-primeColor text-white rounded-md" value="Update Tenant" />
             </form>
         </div>
     );
 };
 
-export default AddTeantContent;
+export default TeantUpdateForm;

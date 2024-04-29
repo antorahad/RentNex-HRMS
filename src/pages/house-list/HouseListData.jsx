@@ -1,3 +1,5 @@
+import { FaRegEdit } from "react-icons/fa";
+import { FaRegTrashCan } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const HouseListData = ({item, handleDeleteHouse}) => {
@@ -12,8 +14,8 @@ const HouseListData = ({item, handleDeleteHouse}) => {
             <td className="px-6 py-4 whitespace-nowrap border-r">{unit} Unit</td>
             <td className="px-6 py-4 whitespace-nowrap border-r">{address}</td>
             <td className="px-6 py-4 whitespace-nowrap flex items-center gap-2">
-                <Link to={`/updatehouse/${_id}`} className="text-warning">Edit</Link>
-                <Link onClick={() => handleDeleteHouse(_id)} className="text-error">Delete</Link>
+                <Link to={`/updatehouse/${_id}`} className="text-warning"><FaRegEdit /></Link>
+                <Link onClick={() => handleDeleteHouse(_id)} className="text-error"><FaRegTrashCan /></Link>
             </td>
         </tr>
     );
