@@ -48,7 +48,7 @@ const Sidebar = ({ toggle }) => {
                     </Link>
                 </li>
                 <li className="py-1">
-                    <Link className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
+                    <Link to={'/billrecord'} className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
                         <HiOutlineDocumentSearch size={20} />
                         Bill Record
                     </Link>

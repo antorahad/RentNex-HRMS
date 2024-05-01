@@ -32,6 +32,16 @@ const HomeContent = () => {
     }, [teantURL])
 
     const runningTeantsCount = teant.filter(item => item.status === 'Running').length;
+
+    const [bill, setBill] = useState([]);
+    const billURL = `http://localhost:3000/bills?email=${user?.email}`;
+    useEffect(() => {
+        fetch(billURL)
+            .then(res => res.json())
+            .then(data => setBill(data))
+    }, [billURL])
+
+    const pendingBillsCount = bill.filter(item => item.billstatus === 'Pending').length;
     return (
         <div className="w-full px-5 py-10 max-w-7xl mx-auto">
             <div className="banner h-[250px] mt-16 mb-8 flex items-center justify-center rounded-2xl text-white font-bold text-xl md:text-2xl lg:text-4xl">
@@ -67,8 +77,8 @@ const HomeContent = () => {
                             <div className="w-[60px] h-[60px] bg-cyan-400 text-white rounded-md flex items-center justify-center">
                             <GrDocumentTime size={25}/>
                             </div>
-                            <h2 className="text-2xl font-bold">Due Bill</h2>
-                            <p className="text-xl font-bold">{house.length}</p>
+                            <h2 className="text-2xl font-bold">Pending Bill</h2>
+                            <p className="text-xl font-bold">{pendingBillsCount} Bill</p>
                         </div>
                     </div>
                     <div className="card bg-orange-600 rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out">

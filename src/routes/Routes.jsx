@@ -13,6 +13,7 @@ import TeantRecordLayout from "../pages/teant-record/TeantRecordLayout";
 import ViewTeantLayout from "../pages/teant-record/ViewTeantLayout";
 import TeantUpdateLayout from "../pages/teant-record/TeantUpdateLayout";
 import AddBillLayout from "../pages/add-bill/AddBillLayout";
+import BillRecordLayout from "../pages/bill-record/BillRecordLayout";
 
 
 const router = createBrowserRouter([
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
             {
                 path: '/addbill',
                 element: <PrivateProvider><AddBillLayout/></PrivateProvider>
+            },
+            {
+                path: '/billrecord',
+                element: <PrivateProvider><BillRecordLayout/></PrivateProvider>
             }
         ]
     },
