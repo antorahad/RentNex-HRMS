@@ -14,6 +14,7 @@ import ViewTeantLayout from "../pages/teant-record/ViewTeantLayout";
 import TeantUpdateLayout from "../pages/teant-record/TeantUpdateLayout";
 import AddBillLayout from "../pages/add-bill/AddBillLayout";
 import BillRecordLayout from "../pages/bill-record/BillRecordLayout";
+import BillRecordUpdateLayout from "../pages/bill-record/BillRecordUpdateLayout";
 
 
 const router = createBrowserRouter([
@@ -76,6 +77,11 @@ const router = createBrowserRouter([
             {
                 path: '/billrecord',
                 element: <PrivateProvider><BillRecordLayout/></PrivateProvider>
+            },
+            {
+                path: '/updatebill/:id',
+                element: <PrivateProvider><BillRecordUpdateLayout/></PrivateProvider>,
+                loader: ({params}) => fetch(`http://localhost:3000/bills/${params.id}`)
             }
         ]
     },

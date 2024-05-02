@@ -26,7 +26,7 @@ const Sidebar = ({ toggle }) => {
                 <li className="py-1">
                     <Link to={'/houselist'} className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
                         <TbHomeSearch size={20} />
-                        House List
+                        House Record
                     </Link>
                 </li>
                 <li className="py-1">

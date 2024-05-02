@@ -1,49 +1,13 @@
-import { useEffect, useState } from "react";
-import useAuth from "../../hook/useAuth";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useLocation, useNavigate } from "react-router-dom";
 
-const AddBillContent = () => {
+const BillRecordUpdateForm = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { user } = useAuth();
-    const [teant, setTeant] = useState([]);
-    const TeantURL = `http://localhost:3000/teants?email=${user?.email}`;
-    useEffect(() => {
-        fetch(TeantURL)
-            .then(res => res.json())
-            .then(data => {
-                const runningTeants = data.filter(item => item.status === 'Running');
-                setTeant(runningTeants);
-            })
-    }, [TeantURL])
-    
-    const [billValues, setBillValues] = useState({
-        houserent: 0,
-        electricity: 0,
-        water: 0,
-        gas: 0,
-        servicecharge: 0,
-        total: 0
-    });
+    const billData = useLoaderData();
+    const {_id, billingmonth, date, name, teantemail, contact, floor, unit, houserent, electricity, water, gas, servicecharge, total, billstatus, billtype} = billData;
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setBillValues(prevState => {
-            // Update the state with the new value
-            const updatedState = { ...prevState, [name]: value };
-            // Calculate total based on the updated state
-            if (name !== "total") {
-                const { houserent, electricity, water, gas, servicecharge } = updatedState;
-                const total = parseFloat(houserent) + parseFloat(electricity) + parseFloat(water) + (gas ? parseFloat(gas) : 0) + parseFloat(servicecharge);
-                // Set the total with 2 decimal places
-                updatedState.total = total.toFixed(2);
-            }
-            return updatedState;
-        });
-    };
-
-    const handleAddBill = e => {
+    const handleUpdateBill = e => {
         e.preventDefault();
         const form = e.target;
         const billingmonth = form.billingmonth.value;
@@ -53,56 +17,46 @@ const AddBillContent = () => {
         const contact = form.contact.value;
         const floor = form.floor.value;
         const unit = form.unit.value;
-        const houserent = form.houserent.value;
-        const electricity = form.electricity.value;
-        const water = form.water.value;
-        const gas = form.gas.value;
-        const servicecharge = form.servicecharge.value;
-        const total = form.total.value;
         const billstatus = form.billstatus.value;
         const billtype = form.billtype.value;
-        const email = user.email
-
-        const newBill = {
-            billingmonth, date, name, teantemail, contact, floor, unit, houserent, electricity, water, gas, servicecharge, total, billstatus, billtype, email
+        const updateBill = {
+            billingmonth, date, name, teantemail, contact, floor, unit, billstatus, billtype
         }
-        
-        fetch(`http://localhost:3000/bills?email=${user?.email}`, {
-            method: "POST",
+
+        fetch(`http://localhost:3000/bills/${_id}`, {
+            method: "PUT",
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newBill)
+            body: JSON.stringify(updateBill)
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                if (data.insertedId) {
+                if (data.modifiedCount > 0) {
                     Swal.fire({
-                        title: "Congratulation",
-                        text: "Bill added successfully",
+                        title: "Updated",
+                        text: "Bill has been updated",
                         icon: "success"
                     });
-                    form.reset()
+                    form.reset();
                     navigate(location?.state ? location.state : '/billrecord');
                 }
-            })
-
+            });
     }
 
     return (
         <div className="w-full px-5 py-10 max-w-7xl mx-auto">
             <div className="banner h-[250px] mt-16 mb-8 flex items-center justify-center rounded-2xl text-white font-bold text-xl md:text-2xl lg:text-4xl">
-                <h1>Rent<span className="text-primeColor">Nex</span> | Add Bill</h1>
+                <h1>Rent<span className="text-primeColor">Nex</span> | Update Bill</h1>
             </div>
-            <form onSubmit={handleAddBill} className="w-full lg:w-3/4 mx-auto bg-bodyColor bg-opacity-80 rounded-md p-5 grid grid-cols-1 md:grid-cols-3 gap-5">
+            <form onSubmit={handleUpdateBill} className="w-full lg:w-3/4 mx-auto bg-bodyColor bg-opacity-80 rounded-md p-5 grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Billing Month*</span>
                     </label>
                     <select
                         className="select rounded-md"
-                        name="billingmonth"
+                        name="billingmonth" defaultValue={billingmonth}
                     >
                         <option value="">
                             Select Billing Month
@@ -125,103 +79,73 @@ const AddBillContent = () => {
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Issue Date*</span>
                     </label>
-                    <input type="date" name="date" className="input rounded-md" />
+                    <input type="date" name="date" defaultValue={date} className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Tenant Name*</span>
                     </label>
-                    <select
-                        className="select rounded-md"
-                        name="name"
-                    >
-                        <option value="">
-                            Select Tenant Name
-                        </option>
-                        {teant.map(item => (
-                            <option key={item._id} value={item.name}>{item.name}</option>
-                        ))}
-                    </select>
+                    <input type="text" name="name" defaultValue={name} className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Tenant Email*</span>
                     </label>
-                    <select
-                        className="select rounded-md"
-                        name="teantemail"
-                    >
-                        <option value="">
-                            Select Tenant Email
-                        </option>
-                        {teant.map(item => (
-                            <option key={item._id} value={item.teantemail}>{item.teantemail}</option>
-                        ))}
-                    </select>
+                    <input type="email" name="teantemail" defaultValue={teantemail} className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Tenant Contact*</span>
                     </label>
-                    <select
-                        className="select rounded-md"
-                        name="contact"
-                    >
-                        <option value="">
-                            Select Tenant Contact
-                        </option>
-                        {teant.map(item => (
-                            <option key={item._id} value={item.contact}>{item.contact}</option>
-                        ))}
-                    </select>
+                    <input type="text" name="contact" defaultValue={contact} className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Rented Floor*</span>
                     </label>
-                    <input type="number" name="floor" placeholder="Enter rented floor" min={1} className="input rounded-md" />
+                    <input type="number" name="floor" defaultValue={floor} placeholder="Enter rented floor" min={1} className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Rented Unit*</span>
                     </label>
-                    <input type="number" name="unit" placeholder="Enter rented unit" min={1} className="input rounded-md" />
+                    <input type="number" name="unit" defaultValue={unit} placeholder="Enter rented unit" min={1} className="input rounded-md" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">House Rent*</span>
                     </label>
-                    <input type="text" name="houserent" placeholder="Enter house rent" className="input rounded-md" onChange={handleChange}/>
+                    <input type="text" name="houserent" defaultValue={houserent} placeholder="Enter house rent" className="input rounded-md" disabled/>
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Electricity Bill*</span>
                     </label>
-                    <input type="text" name="electricity" placeholder="Enter electricity bill" className="input rounded-md"onChange={handleChange} />
+                    <input type="text" name="electricity" defaultValue={electricity} placeholder="Enter electricity bill" className="input rounded-md" disabled/>
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Water Bill*</span>
                     </label>
-                    <input type="text" name="water" placeholder="Enter water bill" className="input rounded-md" onChange={handleChange}/>
+                    <input type="text" name="water" defaultValue={water} placeholder="Enter water bill" className="input rounded-md" disabled/>
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Gas Bill*</span>
                     </label>
-                    <input type="text" name="gas" placeholder="Enter gas bill" className="input rounded-md" onChange={handleChange}/>
+                    <input type="text" name="gas" defaultValue={gas ? gas : '0'} placeholder="Enter gas bill" className="input rounded-md" disabled/>
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Service Charge*</span>
                     </label>
-                    <input type="text" name="servicecharge" placeholder="Enter service charge" className="input rounded-md" onChange={handleChange}/>
+                    <input type="text" name="servicecharge" defaultValue={servicecharge} placeholder="Enter service charge" className="input rounded-md" disabled/>
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-primeColor font-bold">Total Amount*</span>
                     </label>
-                    <input type="text" name="total" value={billValues.total} className="input rounded-md" readOnly />
+                    <input type="text" name="total" defaultValue={total} className="input rounded-md" disabled/>
                 </div>
                 <div className="form-control">
                     <label className="label">
@@ -229,7 +153,7 @@ const AddBillContent = () => {
                     </label>
                     <select
                         className="select rounded-md"
-                        name="billstatus"
+                        name="billstatus" defaultValue={billstatus}
                     >
                         <option value="">
                             Select Bill Status
@@ -244,7 +168,7 @@ const AddBillContent = () => {
                     </label>
                     <select
                         className="select rounded-md"
-                        name="billtype"
+                        name="billtype" defaultValue={billtype}
                     >
                         <option value="">
                             Select Bill Type
@@ -253,10 +177,10 @@ const AddBillContent = () => {
                         <option value="Closed">Closed</option>
                     </select>
                 </div>
-                <input type="submit" className="btn btn-block col-span-1 md:col-span-3 outline-none border-none bg-primeColor hover:bg-primeColor focus:bg-primeColor text-white rounded-md" value="Add Bill" />
+                <input type="submit" className="btn btn-block col-span-1 md:col-span-3 outline-none border-none bg-primeColor hover:bg-primeColor focus:bg-primeColor text-white rounded-md" value="Update Bill" />
             </form>
         </div>
     );
 };
 
-export default AddBillContent;
+export default BillRecordUpdateForm;
