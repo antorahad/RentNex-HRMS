@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const BillRecordContent = () => {
     const { user } = useAuth();
     const [bill, setBill] = useState([]);
-    const billURL = `http://localhost:3000/bills?email=${user?.email}`;
+    const billURL = `https://hrms-server-snowy.vercel.app/bills?email=${user?.email}`;
     useEffect(() => {
         fetch(billURL)
             .then(res => res.json())
@@ -33,7 +33,7 @@ const BillRecordContent = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/bills/${_id}`, {
+                fetch(`https://hrms-server-snowy.vercel.app/bills/${_id}`, {
                     method: "DELETE",
                 })
                     .then((res) => res.json())

@@ -34,7 +34,7 @@ const AddTeantContent = () => {
             name, teantemail, contact, gender, religion, marital, nid, member, family, photo, occupation, floor, unit, checkindate, checkoutdate, status, previousowner, ownercontact, address, email
         }
 
-        fetch(`http://localhost:3000/teants?email=${user?.email}`, {
+        fetch(`https://hrms-server-snowy.vercel.app/teants?email=${user?.email}`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

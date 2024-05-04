@@ -40,7 +40,7 @@ const router = createBrowserRouter([
             {
                 path: '/updateprofile/:id',
                 element: <PrivateProvider><UpdateProfile/></PrivateProvider>,
-                loader: ({params}) => fetch(`http://localhost:3000/users/${params.id}`)
+                loader: ({params}) => fetch(`https://hrms-server-snowy.vercel.app/users/${params.id}`)
             },
             {
                 path: '/addhouse',
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
             {
                 path: '/updatehouse/:id',
                 element: <PrivateProvider><UpdateHouse/></PrivateProvider>,
-                loader: ({params}) => fetch(`http://localhost:3000/houses/${params.id}`)
+                loader: ({params}) => fetch(`https://hrms-server-snowy.vercel.app/houses/${params.id}`)
             },
             {
                 path: '/addteant',
@@ -66,12 +66,12 @@ const router = createBrowserRouter([
             {
                 path: '/viewteant/:id',
                 element: <PrivateProvider><ViewTeantLayout/></PrivateProvider>,
-                loader: ({params}) => fetch(`http://localhost:3000/teants/${params.id}`)
+                loader: ({params}) => fetch(`https://hrms-server-snowy.vercel.app/teants/${params.id}`)
             },
             {
                 path: '/updateteant/:id',
                 element: <PrivateProvider><TeantUpdateLayout/></PrivateProvider>,
-                loader: ({params}) => fetch(`http://localhost:3000/teants/${params.id}`)
+                loader: ({params}) => fetch(`https://hrms-server-snowy.vercel.app/teants/${params.id}`)
             },
             {
                 path: '/addbill',
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
             {
                 path: '/updatebill/:id',
                 element: <PrivateProvider><BillRecordUpdateLayout/></PrivateProvider>,
-                loader: ({params}) => fetch(`http://localhost:3000/bills/${params.id}`)
+                loader: ({params}) => fetch(`https://hrms-server-snowy.vercel.app/bills/${params.id}`)
             },
             {
                 path: '/sendbill',

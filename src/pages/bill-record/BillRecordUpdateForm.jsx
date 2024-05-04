@@ -23,7 +23,7 @@ const BillRecordUpdateForm = () => {
             billingmonth, date, name, teantemail, contact, floor, unit, billstatus, billtype
         }
 
-        fetch(`http://localhost:3000/bills/${_id}`, {
+        fetch(`https://hrms-server-snowy.vercel.app/bills/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'

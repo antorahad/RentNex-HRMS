@@ -25,7 +25,7 @@ const Register = () => {
                 icon: "success"
             });
             navigate(location?.state ? location.state : '/');
-            fetch('http://localhost:3000/users', {
+            fetch('https://hrms-server-snowy.vercel.app/users', {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'

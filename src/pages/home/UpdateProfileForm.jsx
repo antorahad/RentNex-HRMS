@@ -21,7 +21,7 @@ const UpdateProfileForm = () => {
         }
         console.log(updateUser);
 
-        fetch(`http://localhost:3000/users/${_id}`, {
+        fetch(`https://hrms-server-snowy.vercel.app/users/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'

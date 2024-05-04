@@ -8,7 +8,7 @@ import { GrDocumentTime, GrDocumentVerified } from "react-icons/gr";
 const HomeContent = () => {
     const { user } = useAuth();
     const [userInfo, setUserInfo] = useState([]);
-    const userURL = `http://localhost:3000/users?email=${user?.email}`;
+    const userURL = `https://hrms-server-snowy.vercel.app/users?email=${user?.email}`;
     useEffect(() => {
         fetch(userURL)
             .then(res => res.json())
@@ -16,7 +16,7 @@ const HomeContent = () => {
     }, [userURL])
 
     const [house, setHouse] = useState([]);
-    const houseURL = `http://localhost:3000/houses?email=${user?.email}`;
+    const houseURL = `https://hrms-server-snowy.vercel.app/houses?email=${user?.email}`;
     useEffect(() => {
         fetch(houseURL)
             .then(res => res.json())
@@ -24,7 +24,7 @@ const HomeContent = () => {
     }, [houseURL])
 
     const [teant, setTeant] = useState([]);
-    const teantURL = `http://localhost:3000/teants?email=${user?.email}`;
+    const teantURL = `https://hrms-server-snowy.vercel.app/teants?email=${user?.email}`;
     useEffect(() => {
         fetch(teantURL)
             .then(res => res.json())
@@ -34,7 +34,7 @@ const HomeContent = () => {
     const runningTeantsCount = teant.filter(item => item.status === 'Running').length;
 
     const [bill, setBill] = useState([]);
-    const billURL = `http://localhost:3000/bills?email=${user?.email}`;
+    const billURL = `https://hrms-server-snowy.vercel.app/bills?email=${user?.email}`;
     useEffect(() => {
         fetch(billURL)
             .then(res => res.json())

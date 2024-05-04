@@ -22,7 +22,7 @@ const UpdateHouseForm = () => {
           name, contact, house, area, floor, unit, address
         }
 
-        fetch(`http://localhost:3000/houses/${_id}`, {
+        fetch(`https://hrms-server-snowy.vercel.app/houses/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'

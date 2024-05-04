@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser';
 const SendBillContent = () => {
     const { user } = useAuth();
     const [bill, setBill] = useState([]);
-    const BillURL = `http://localhost:3000/bills?email=${user?.email}`;
+    const BillURL = `https://hrms-server-snowy.vercel.app/bills?email=${user?.email}`;
     useEffect(() => {
         fetch(BillURL)
             .then(res => res.json())

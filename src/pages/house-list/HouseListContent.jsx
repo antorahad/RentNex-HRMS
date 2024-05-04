@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const HouseListContent = () => {
     const { user } = useAuth();
     const [house, setHouse] = useState([]);
-    const houseURL = `http://localhost:3000/houses?email=${user?.email}`;
+    const houseURL = `https://hrms-server-snowy.vercel.app/houses?email=${user?.email}`;
     useEffect(() => {
         fetch(houseURL)
             .then(res => res.json())
@@ -24,7 +24,7 @@ const HouseListContent = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/houses/${_id}`, {
+                fetch(`https://hrms-server-snowy.vercel.app/houses/${_id}`, {
                     method: "DELETE",
                 })
                     .then((res) => res.json())

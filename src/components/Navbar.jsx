@@ -8,7 +8,7 @@ const Navbar = ({ handleToggle, toggle }) => {
     const { user, logOut } = useAuth();
 
     const [userInfo, setUserInfo] = useState([]);
-    const userURL = `http://localhost:3000/users?email=${user?.email}`;
+    const userURL = `https://hrms-server-snowy.vercel.app/users?email=${user?.email}`;
     useEffect(() => {
         fetch(userURL)
             .then(res => res.json())

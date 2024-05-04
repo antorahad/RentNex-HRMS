@@ -34,7 +34,7 @@ const TeantUpdateForm = () => {
             name, teantemail, contact, gender, religion, marital, nid, member, family, photo, occupation, floor, unit, checkindate, checkoutdate, status, previousowner, ownercontact, address
         }
 
-        fetch(`http://localhost:3000/teants/${_id}`, {
+        fetch(`https://hrms-server-snowy.vercel.app/teants/${_id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'

@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const TeantRecordContent = () => {
     const { user } = useAuth();
     const [teant, setTeant] = useState([]);
-    const TeantURL = `http://localhost:3000/teants?email=${user?.email}`;
+    const TeantURL = `https://hrms-server-snowy.vercel.app/teants?email=${user?.email}`;
     useEffect(() => {
         fetch(TeantURL)
             .then(res => res.json())
@@ -33,7 +33,7 @@ const TeantRecordContent = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/teants/${_id}`, {
+                fetch(`https://hrms-server-snowy.vercel.app/teants/${_id}`, {
                     method: "DELETE",
                 })
                     .then((res) => res.json())

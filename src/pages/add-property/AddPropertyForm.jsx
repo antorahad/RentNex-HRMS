@@ -22,7 +22,7 @@ const AddPropertyForm = () => {
             name, contact, house, area, floor, unit, address, email
         }
 
-        fetch(`http://localhost:3000/houses?email=${user?.email}`, {
+        fetch(`https://hrms-server-snowy.vercel.app/houses?email=${user?.email}`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

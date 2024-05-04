@@ -8,7 +8,7 @@ const AddBillContent = () => {
     const navigate = useNavigate();
     const { user } = useAuth();
     const [teant, setTeant] = useState([]);
-    const TeantURL = `http://localhost:3000/teants?email=${user?.email}`;
+    const TeantURL = `https://hrms-server-snowy.vercel.app/teants?email=${user?.email}`;
     useEffect(() => {
         fetch(TeantURL)
             .then(res => res.json())
@@ -67,7 +67,7 @@ const AddBillContent = () => {
             billingmonth, date, name, teantemail, contact, floor, unit, houserent, electricity, water, gas, servicecharge, total, billstatus, billtype, email
         }
         
-        fetch(`http://localhost:3000/bills?email=${user?.email}`, {
+        fetch(`https://hrms-server-snowy.vercel.app/bills?email=${user?.email}`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
