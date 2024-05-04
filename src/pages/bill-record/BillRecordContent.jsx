@@ -22,35 +22,36 @@ const BillRecordContent = () => {
     const filterBill = bill.filter(item => item.name.toLowerCase().includes(search.toLocaleLowerCase()) ||
         item.teantemail.toLowerCase().includes(search.toLowerCase()) || item.contact.toLowerCase().includes(search.toLowerCase()) || item.billingmonth.toLowerCase().includes(search.toLowerCase()) || item.date.toLowerCase().includes(search.toLowerCase()) || item.billstatus.toLowerCase().includes(search.toLowerCase()));
 
-        const handleDeleteBill = _id => {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch(`http://localhost:3000/bills/${_id}`, {
-                        method: "DELETE",
-                    })
-                        .then((res) => res.json())
-                        .then((data) => {
-                            console.log(data);
-                            if (data.deletedCount > 0) {
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Bill deleted successfully",
-                                    icon: "success",
-                                });
-                                setBill(filterBill.filter(item => item._id !== _id));
-                            }
-                        });
-                }
-            });
-        }    
+    const handleDeleteBill = _id => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3000/bills/${_id}`, {
+                    method: "DELETE",
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Bill deleted successfully",
+                                icon: "success",
+                            });
+                            setBill(filterBill.filter(item => item._id !== _id));
+                        }
+                    });
+            }
+        });
+    }
+
     return (
         <div className="w-full px-5 py-10 max-w-7xl mx-auto">
             <div className="banner h-[250px] mt-16 mb-8 flex items-center justify-center rounded-2xl text-white font-bold text-xl md:text-2xl lg:text-4xl">
@@ -90,13 +91,20 @@ const BillRecordContent = () => {
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {
-                            filterBill.map(item => <BillRecordData key={item._id} item={item} handleDeleteBill={handleDeleteBill}></BillRecordData>)
-                        }
+                        {filterBill.length > 0 ? (
+                            // Render filtered bill records
+                            filterBill.map((item) => (
+                                <BillRecordData key={item._id} item={item} handleDeleteBill={handleDeleteBill} />
+                            ))
+                        ) : (
+                            // Render a single table row with "No Bill Added" message
+                            <tr>
+                                <td className="px-6 py-4 text-center" colSpan="15">No Bill Added</td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
-
         </div>
     );
 };

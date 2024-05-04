@@ -54,13 +54,12 @@ const Sidebar = ({ toggle }) => {
                     </Link>
                 </li>
                 <li className="py-1">
-                    <Link className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
+                    <Link to={'/sendbill'} className="flex items-center gap-2 hover:bg-primeColor p-3 rounded-md">
                         <MdAttachEmail size={20} />
                         Send Bill
                     </Link>
                 </li>
             </ul>
-
         </div>
     );
 };

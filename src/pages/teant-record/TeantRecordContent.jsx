@@ -68,11 +68,19 @@ const TeantRecordContent = () => {
                     className="pl-10 pr-4 py-2 input input-bordered rounded-md w-full"
                 />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                {
-                    filterTeant.map(item => <TeantRecordData key={item._id} item={item} handleDeleteTeant={handleDeleteTeant}></TeantRecordData>)
-                }
-            </div>
+            {filterTeant.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                    {/* Render tenant data */}
+                    {filterTeant.map(item => (
+                        <TeantRecordData key={item._id} item={item} handleDeleteTeant={handleDeleteTeant} />
+                    ))}
+                </div>
+            ) : (
+                // Render "No Tenant Added" message
+                <div className="flex justify-center items-center h-48">
+                    <p className="text-lg">No Tenant Added</p>
+                </div>
+            )}
         </div>
     );
 };

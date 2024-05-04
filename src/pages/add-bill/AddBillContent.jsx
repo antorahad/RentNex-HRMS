@@ -35,7 +35,7 @@ const AddBillContent = () => {
             // Calculate total based on the updated state
             if (name !== "total") {
                 const { houserent, electricity, water, gas, servicecharge } = updatedState;
-                const total = parseFloat(houserent) + parseFloat(electricity) + parseFloat(water) + (gas ? parseFloat(gas) : 0) + parseFloat(servicecharge);
+                const total = parseFloat(houserent) + parseFloat(electricity) + parseFloat(water) + parseFloat(gas) + parseFloat(servicecharge);
                 // Set the total with 2 decimal places
                 updatedState.total = total.toFixed(2);
             }

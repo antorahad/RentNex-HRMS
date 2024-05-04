@@ -63,9 +63,15 @@ const HouseListContent = () => {
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {
+                        {house.length > 0 ? (
+                            // Render house data
                             house.map(item => <HouseListData key={item._id} item={item} handleDeleteHouse={handleDeleteHouse}></HouseListData>)
-                        }
+                        ) : (
+                            // Render a single table row with "No House Added" message
+                            <tr>
+                                <td className="px-6 py-4 text-center" colSpan="8">No House Added</td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>

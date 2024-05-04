@@ -16,7 +16,7 @@ const BillRecordData = ({ item, handleDeleteBill }) => {
             <td className="px-6 py-4 text-center whitespace-nowrap border-r">{houserent}</td>
             <td className="px-6 py-4 text-center whitespace-nowrap border-r">{electricity}</td>
             <td className="px-6 py-4 text-center whitespace-nowrap border-r">{water}</td>
-            <td className="px-6 py-4 text-center whitespace-nowrap border-r">{gas ? gas : '0'}</td>
+            <td className="px-6 py-4 text-center whitespace-nowrap border-r">{gas}</td>
             <td className="px-6 py-4 text-center whitespace-nowrap border-r">{servicecharge}</td>
             <td className="px-6 py-4 text-center whitespace-nowrap border-r">{total}</td>
             <td className="px-6 py-4 text-center whitespace-nowrap border-r">{billstatus}</td>

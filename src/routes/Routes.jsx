@@ -15,12 +15,15 @@ import TeantUpdateLayout from "../pages/teant-record/TeantUpdateLayout";
 import AddBillLayout from "../pages/add-bill/AddBillLayout";
 import BillRecordLayout from "../pages/bill-record/BillRecordLayout";
 import BillRecordUpdateLayout from "../pages/bill-record/BillRecordUpdateLayout";
+import SendBillLayout from "../pages/send-bill/SendBillLayout";
+import Error from "../error/Error";
 
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
+        errorElement: <Error/>,
         children: [
             {
                 path: '/',
@@ -82,6 +85,10 @@ const router = createBrowserRouter([
                 path: '/updatebill/:id',
                 element: <PrivateProvider><BillRecordUpdateLayout/></PrivateProvider>,
                 loader: ({params}) => fetch(`http://localhost:3000/bills/${params.id}`)
+            },
+            {
+                path: '/sendbill',
+                element: <PrivateProvider><SendBillLayout/></PrivateProvider>
             }
         ]
     },
